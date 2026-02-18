@@ -16,6 +16,8 @@ dynamic routing, centralized DHCP with relay, basic server services, and ACL-bas
 - Extended ACLs applied inbound on user VLANs (10/20)
 
 ## Topology overview
+
+![Topology](screenshots/01-topology.png)
 Routers:
 - R-EDGE-01, R-EDGE-02 (HSRP pair for user VLANs)
 - R-CORE-01 (core side, DHCP + server/admin VLANs)
@@ -116,10 +118,12 @@ FTP:
 - Tested login from a PC in another VLAN (works).
 
 ## Files in this repository
-- .pkt — Packet Tracer project file (open with Cisco Packet Tracer 8.2.2)
-- /configs — device configs (routers/switches)
-- /screenshots — verification screenshots (HSRP, EIGRP neighbors, routes, VLANs, trunks, DHCP, ACL hits, services)
-- Routing_Tables.xlsx — addressing/routing table for the lab
+
+- `packet-tracer/*.pkt` — Cisco Packet Tracer project file (Cisco Packet Tracer 8.2.2)
+- `configs/` — device configurations (routers/switches)
+- `screenshots/` — verification screenshots (HSRP, EIGRP neighbors/routes, VLANs, trunks, DHCP relay/pools, ACL)
+- `Routing_Tables.xlsx` — addressing/routing table for the lab
+
 
 ## How to run
 1) Install Cisco Packet Tracer 8.2.2.
@@ -139,3 +143,4 @@ FTP:
 - Some real-world behaviors (timers, hardware-specific features, etc.) may differ on physical devices.
 
 Author: Roman Saratovskii
+
