@@ -1,0 +1,35 @@
+R-CORE-01
+
+int g0/2.30
+encapsulation dot1Q 30
+ip add 192.168.30.1 255.255.255.0
+
+int g0/2.99
+encapsulation dot1Q 99
+ip add 192.168.99.1 255.255.255.0
+
+ip dhcp pool 10
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.254
+dns-server 192.168.30.4
+
+ip dhcp pool 20
+network 192.168.20.0 255.255.255.0
+default-router 192.168.20.254
+dns-server 192.168.30.4
+
+ip dhcp pool 30
+network 192.168.30.0 255.255.255.0
+default-router 192.168.30.1
+dns-server 192.168.30.4
+
+ip dhcp pool 99
+network 192.168.99.0 255.255.255.0
+default-router 192.168.99.1
+dns-server 192.168.30.4
+
+router eigrp 1
+network 10.10.0.0 0.255.255.255
+network 20.20.1.0 0.255.255.255
+network 192.168.30.0 0.0.0.255
+network 192.168.99.0 0.0.0.255

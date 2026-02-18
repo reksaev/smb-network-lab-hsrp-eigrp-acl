@@ -1,0 +1,13 @@
+SW-OFFICE-01
+
+int range g0/1-2
+switchport mode trunk 
+
+int f0/1
+switchport mode access
+switchport access vlan 10
+
+
+int f0/2
+switchport mode access
+switchport access vlan 20

@@ -1,0 +1,16 @@
+SW-CORE-01
+
+int range f0/1-2, g0/2
+switchport mode trunk 
+
+int f0/3
+switchport mode access 
+switchport access vlan 30
+
+vlan 99
+
+int range f0/1-2
+channel-protocol lacp
+channel-group 1 mode active
+int port-channel 1
+switchport mode trunk 

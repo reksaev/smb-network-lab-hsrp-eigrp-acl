@@ -1,0 +1,56 @@
+R-EDGE-01
+
+int g0/1.10
+encapsulation dot1Q 10
+ip add 192.168.10.1 255.255.255.0
+
+int g0/1.20
+encapsulation dot1Q 20
+ip add 192.168.20.1 255.255.255.0
+
+router eigrp 1
+network 10.10.0.0 0.255.255.255
+network 192.168.10.0 0.0.0.255
+network 192.168.20.0 0.0.0.255
+
+int g0/1.10
+ip helper-address 10.10.0.1
+int g0/1.20
+ip helper-address 10.10.0.1
+
+int g0/1.10
+standby 1 ip 192.168.10.254
+standby 1 priority 100
+standby 1 preempt 
+
+int g0/1.20
+standby 1 ip 192.168.20.254
+standby 1 priority 100
+standby 1 preempt 
+
+ip access-list extended ACL_VLAN10_IN
+permit udp any eq bootpc any eq bootps
+permit udp any eq bootps any eq bootpc
+permit udp any eq domain any
+permit tcp any eq domain any
+permit icmp 192.168.10.0 0.0.0.255 192.168.99.0 0.0.0.255 echo-reply
+permit tcp  192.168.10.0 0.0.0.255 192.168.99.0 0.0.0.255 established
+deny ip 192.168.10.0 0.0.0.255 192.168.99.0 0.0.0.255
+permit ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+permit ip 192.168.10.0 0.0.0.255 host 192.168.30.4
+permit ip 192.168.10.0 0.0.0.255 any
+
+ip access-list extended ACL_VLAN20_IN
+permit udp any eq bootpc any eq bootps
+permit udp any eq bootps any eq bootpc
+permit udp any eq domain any
+permit tcp any eq domain any
+permit icmp 192.168.20.0 0.0.0.255 192.168.99.0 0.0.0.255 echo-reply
+permit tcp  192.168.20.0 0.0.0.255 192.168.99.0 0.0.0.255 established
+deny ip 192.168.20.0 0.0.0.255 192.168.99.0 0.0.0.255
+permit ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+permit ip 192.168.20.0 0.0.0.255 host 192.168.30.4
+permit ip 192.168.20.0 0.0.0.255 any
+
+
+
